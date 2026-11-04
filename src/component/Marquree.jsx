@@ -3,6 +3,7 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { ArrowBigDown, ArrowBigUp, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Separator } from "@heroui/react";
 
 const Marquree = async () => {
   const marqureedata = await marqureeContent();
@@ -37,6 +38,7 @@ const Marquree = async () => {
                 )}
                 {Number(marqdata.change.pct).toLocaleString("bn-BD")}%
               </span>
+               <Separator orientation="vertical" />
             </div>
           </Link>
           );

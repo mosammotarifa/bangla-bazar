@@ -5,7 +5,7 @@ import React from "react";
 
 const PriceDrecrese = async () => {
   const Pricedrecrese = await marqureeContent();
-      const unitNames = {
+  const unitNames = {
     kg: "কেজি",
     gram: "গ্রাম",
     litre: "লিটার",
@@ -21,52 +21,57 @@ const PriceDrecrese = async () => {
       {/* Section Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">দাম কমেছে</h2>
+          <h2 className="text-xl flex gap-0.5 items-center font-bold text-gray-900">
+            <ArrowBigDown className="text-green-500" /> <span>দাম কমেছে</span>
+          </h2>
         </div>
       </div>
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {Pricedrecrese.filter((pricedrec) => pricedrec.change.dir === "down").slice(0,9).map(
-          (pricedrec) => {return(
-         <Link   key={pricedrec.id} href={`/allcategoryproduct/${pricedrec.category}/${pricedrec.id}`}>
-            <div
-            
-              className="rounded-2xl border border-red-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-            >
-              {/* Product Info */}
-              <div className="flex items-center gap-3">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-red-50 text-3xl">
-                  {pricedrec.image}
-                </div>
+        {Pricedrecrese.filter((pricedrec) => pricedrec.change.dir === "down")
+          .slice(0, 9)
+          .map((pricedrec) => {
+            return (
+              <Link
+                key={pricedrec.id}
+                href={`/allcategoryproduct/${pricedrec.category}/${pricedrec.id}`}
+              >
+                <div className="rounded-2xl border border-red-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                  {/* Product Info */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-red-50 text-3xl">
+                      {pricedrec.image}
+                    </div>
 
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-bold text-gray-800">
-                    {pricedrec.nameBn}
-                  </h3>
-                    <p className="text-sm mb-2 text-gray-500">
-                  প্রতি {unitNames[pricedrec.unit] || pricedrec.unit}
-                </p>
-                </div>
-              </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-bold text-gray-800">
+                        {pricedrec.nameBn}
+                      </h3>
+                      <p className="text-sm mb-2 text-gray-500">
+                        প্রতি {unitNames[pricedrec.unit] || pricedrec.unit}
+                      </p>
+                    </div>
+                  </div>
 
-              {/* Price Info */}
-              <div className="mt-4 flex items-end justify-between border-t border-gray-100 pt-4">
-                <div>
-                  <p className="mb-1 text-sm text-gray-500">আজকের দাম</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {Number(pricedrec.today).toLocaleString("bn-BD")}টাকা
-                  </p>
-                </div>
+                  {/* Price Info */}
+                  <div className="mt-4 flex items-end justify-between border-t border-gray-100 pt-4">
+                    <div>
+                      <p className="mb-1 text-sm text-gray-500">আজকের দাম</p>
+                      <p className="text-2xl font-bold text-gray-900">
+                        {Number(pricedrec.today).toLocaleString("bn-BD")}টাকা
+                      </p>
+                    </div>
 
-                <div className="flex items-center gap-1 rounded-full bg-red-50 px-3 py-2 font-bold text-red-600">
-                  <ArrowBigDown size={18} />
-                  {Number(pricedrec.change.pct).toLocaleString("bn-BD")}%
+                    <div className="flex items-center gap-1 rounded-full bg-red-50 px-3 py-2 font-bold text-red-600">
+                      <ArrowBigDown size={18} />
+                      {Number(pricedrec.change.pct).toLocaleString("bn-BD")}%
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div></Link>
-        )},
-        )}
+              </Link>
+            );
+          })}
       </div>
     </div>
   );

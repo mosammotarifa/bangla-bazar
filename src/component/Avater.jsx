@@ -15,7 +15,7 @@ const Avater = ({ session }) => {
       <Popover>
         <Popover.Trigger aria-label="User profile">
           <div className="flex cursor-pointer items-center gap-3 rounded-xl   bg-white px-3 py-2 transition ">
-            <Avatar size="sm">
+            <Avatar size="md">
               <Avatar.Image
                 alt={session?.user.name}
                 src={session?.user.image}
