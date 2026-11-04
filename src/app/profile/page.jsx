@@ -1,5 +1,6 @@
 "use client";
 import { signOut, updateUser, useSession } from "@/lib/auth.client";
+import { ArrowUturnCcwLeft } from "@gravity-ui/icons";
 import React from "react";
 
 const ProfilePage = () => {
@@ -55,24 +56,23 @@ const ProfilePage = () => {
               {session?.user.email}
             </p>
           </div>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-5 flex justify-end">
             <button
               onClick={() => signOut()}
-              className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-500 transition hover:bg-red-50"
+              className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-semibold text-red-600 shadow-sm transition-all duration-200 hover:border-red-300 hover:bg-red-100 hover:shadow-md active:scale-95"
             >
-              ↩ সাইন আউট
+              <ArrowUturnCcwLeft size={17} />
+              <span>সাইন আউট</span>
             </button>
           </div>
         </div>
 
         {/* Logout */}
 
-      
-
         {/* Update Profile */}
         <form
           onSubmit={onSubmit}
-          className="space-y-4 bg-white mt-10 border border-gray-100 p-5 rounded-2xl"
+          className="space-y-4 bg-white mt-10  border border-gray-100 p-10 rounded-2xl"
         >
           <div>
             <h2 className="mb-4 text-lg font-semibold text-gray-900">তথ্য</h2>

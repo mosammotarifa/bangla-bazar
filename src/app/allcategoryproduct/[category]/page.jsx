@@ -1,4 +1,4 @@
-import AllCategoryProduct from "@/component/AllCategoryProduct";
+
 import SortedProducted from "@/component/SortedProducted";
 import { AllCatagoriesProductsData } from "@/lib/data";
 
@@ -8,7 +8,7 @@ const ProductCategory = async ({ params }) => {
   console.log(" where isthe data", categorydata, category);
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 py-15">
      
       <div className="container mx-auto">
         <div className="flex  flex-wrap items-center justify-between gap-3 rounded-2xl border border-green-100 bg-white p-5 mt-5">

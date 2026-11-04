@@ -35,7 +35,7 @@ const ProductDetailsPage = async ({ params }) => {
   };
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 ">
       <div className=" container mx-auto">
         <div className=" space-y-8   px-4 py-8 sm:px-6 lg:px-8">
           {/* Product Header */}
@@ -239,9 +239,7 @@ const ProductDetailsPage = async ({ params }) => {
               </table>
             </div>
 
-            <p className="text-xs text-gray-400">
-              * বাজারের গড় দাম = (সর্বনিম্ন দাম + সর্বোচ্চ দাম) ÷ 2
-            </p>
+          
           </section>
         </div>
       </div>
