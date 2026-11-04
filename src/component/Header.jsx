@@ -7,7 +7,7 @@ const Header = async () => {
   const headerData = await headerContent();
 
   return (
-    <div className="flex border-t flex-wrap items-center justify-center gap-2 rounded-xl bg-white p-2 sm:gap-3 sm:p-4 md:justify-start md:gap-5">
+    <div className="flex border-t flex-wrap items-center justify-center container mx-auto gap-2 rounded-xl bg-white p-2 sm:gap-3 sm:p-4 md:justify-start md:gap-5">
         {headerData.map((data) => (
       // console.log("HEADER DATA:", headerData);
       <Link  key={data.id} href={`/allcategoryproduct/${data.slug}`}> 

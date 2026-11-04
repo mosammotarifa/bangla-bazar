@@ -22,7 +22,7 @@ const Navbar = () => {
   const today = format(new Date(), "EEEE, d MMMM yyyy", { locale: bn });
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl bg-white px-4 py-3  sm:flex-row sm:items-center sm:justify-between sm:px-5">
+    <div className="flex flex-col container mx-auto gap-4 rounded-xl bg-white px-4 py-3  sm:flex-row sm:items-center sm:justify-between sm:px-5">
       {/* Logo & Date */}
       <Link href={"/"}>
         <div className="flex items-center gap-3">

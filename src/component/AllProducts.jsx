@@ -16,7 +16,7 @@ const AllProducts = async () => {
     bag: "বস্তা",
   };
   return (
-    <div id="allproducts" className="my-4 scroll-mt-10 space-y-5">
+    <div id="allproducts" className="my-4 container mx-auto scroll-mt-10 mb-10 space-y-5">
       {/* Section Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>

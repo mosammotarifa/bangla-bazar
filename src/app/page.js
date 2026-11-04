@@ -6,8 +6,8 @@ import React from 'react';
 
 const HomePage = () => {
   return (
-    <div >
-      <Banner/>
+    <div className='bg-gray-100' >
+     <div className='container mx-auto' > <Banner/></div>
       <PriceIncrease/>
       <PriceDrecrese/>
       <AllProducts/>

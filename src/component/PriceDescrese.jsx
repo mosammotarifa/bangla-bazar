@@ -17,7 +17,7 @@ const PriceDrecrese = async () => {
   };
   // const priceinc = {PriceIncrease.change.dir==="up"}
   return (
-    <div className=" my-8 space-y-4 ">
+    <div className=" my-8 space-y-4  container mx-auto">
       {/* Section Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
