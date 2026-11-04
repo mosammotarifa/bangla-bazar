@@ -16,7 +16,7 @@ const SortedProducted = ({ categorydata }) => {
     return new Date(b.updatedAt) - new Date(a.updatedAt);
   });
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-gray-100 bg-white p-3 shadow-sm mt-10">
         <p className="text-sm font-semibold text-gray-700">সকল পণ্য</p>
 

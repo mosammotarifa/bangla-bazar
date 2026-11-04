@@ -30,7 +30,7 @@ const ProductDetailsPage = async ({ params }) => {
   };
 
   return (
-    <div className=" space-y-8 bg-green-50  px-4 py-8 sm:px-6 lg:px-8">
+    <div className=" space-y-8  bg-green-50  px-4 py-8 sm:px-6 lg:px-8">
       {/* Product Header */}
 <div className=" flex">
  <Link href={"/"}> <span>হোম</span> </Link>

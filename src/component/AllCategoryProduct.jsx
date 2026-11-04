@@ -6,7 +6,7 @@ const AllCategoryProduct = ({ categorydata }) => {
   console.log(categorydata);
 
   return (
-    <div className="space-y-5 mb-10">
+    <div className="space-y-5c container mx-auto mb-10">
       {/* Product Card - 3 Column Grid */}
       <Link href={`/allcategoryproduct/${categorydata.category}/${categorydata.id}`}>
         <div>
