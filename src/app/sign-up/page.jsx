@@ -1,10 +1,48 @@
-
+"use client";
+import { signIn, signUp } from "@/lib/auth.client";
 import Link from "next/link";
 import React from "react";
 
+import { Eye, EyeSlash } from "@gravity-ui/icons";
+import { Button, InputGroup, Label, TextField } from "@heroui/react";
+import { useState } from "react";
+
 const SignUpPage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const useData = Object.fromEntries(formData.entries());
+
+    // Check password match
+    if (useData.password !== useData.confirmPassword) {
+      alert("পাসওয়ার্ড দুটি মিলছে না!");
+      return;
+    }
+    console.log(useData);
+    const { data, error } = await signUp.email({
+      name: useData.name,
+      email: useData.email,
+      image: useData.image,
+      password: useData.password,
+      callbackURL: "/",
+    });
+    console.log("sign in ", data, error);
+  };
+  const handleSignInGoogle = async () => {
+    const data = await signIn.social({
+      provider: "google",
+    });
+    console.log(data);
+  };
+  const handleSignInGithub = async () => {
+    const data = await signIn.social({
+      provider: "github",
+    });
+    console.log(data);
+  };
   return (
-    <div className="mt-10" >
+    <div className="mt-10">
       <div className="text-center ">
         <h2 className="mb-2 text-2xl font-bold text-gray-900">
           অ্যাকাউন্ট তৈরি করুন
@@ -16,7 +54,7 @@ const SignUpPage = () => {
       </div>
 
       <div className="mx-auto my-10 w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-lg sm:p-8">
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={onSubmit}>
           {/* Name */}
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">
@@ -25,13 +63,12 @@ const SignUpPage = () => {
             <input
               type="text"
               name="name"
-              placeholder="যেমন: রহিম উদ্দিন"
+              placeholder="Enter your name"
               required
               autoComplete="name"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
             />
           </div>
-
           {/* Email */}
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">
@@ -46,37 +83,84 @@ const SignUpPage = () => {
               className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
             />
           </div>
+          <div className="space-y-2">
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-700"
+            >
+              প্রোফাইল ছবি
+            </label>
+
+            <input
+              type="url"
+              id="image"
+              name="image"
+              placeholder="Enter your image URL"
+              className="w-full rounded-lg border border-gray-300 p-2 text-sm"
+            />
+          </div>
 
           {/* Password */}
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">
               পাসওয়ার্ড
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="কমপক্ষে ৮ অক্ষর"
-              minLength={8}
-              required
-              autoComplete="new-password"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
-            />
+            <div className="flex justify-between items-center gap-3">
+              <input
+                type={isVisible ? "text" : "password"}
+                name="password"
+                placeholder="কমপক্ষে ৮ অক্ষর"
+                minLength={8}
+                required
+                autoComplete="new-password"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
+              />
+              <Button
+                className={"border p-3 "}
+                isIconOnly
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                size="sm"
+                variant="ghost"
+                onPress={() => setIsVisible(!isVisible)}
+              >
+                {isVisible ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeSlash className="size-4" />
+                )}
+              </Button>
+            </div>
           </div>
-
-          {/* Confirm Password */}
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700">
               পাসওয়ার্ড নিশ্চিত করুন
             </label>
-            <input
-              type="password"
-              name="repassword"
-              placeholder="আবার লিখুন"
-              minLength={8}
-              required
-              autoComplete="new-password"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
-            />
+
+            <div className="flex justify-between items-center gap-3">
+              <input
+                type={isVisible ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="আবার পাসওয়ার্ড লিখুন"
+                minLength={8}
+                required
+                autoComplete="new-password"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
+              />
+              <Button
+                className={"border p-3 "}
+                isIconOnly
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                size="sm"
+                variant="ghost"
+                onPress={() => setIsVisible(!isVisible)}
+              >
+                {isVisible ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeSlash className="size-4" />
+                )}
+              </Button>
+            </div>
           </div>
 
           {/* Sign Up */}
@@ -97,6 +181,7 @@ const SignUpPage = () => {
           {/* Social Login */}
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
+              onClick={handleSignInGoogle}
               type="button"
               className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50 hover:shadow-md"
             >
@@ -104,6 +189,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              onClick={handleSignInGithub}
               type="button"
               className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-900 px-3 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-black"
             >
@@ -114,12 +200,12 @@ const SignUpPage = () => {
           {/* Sign In Link */}
           <p className="pt-3 text-center text-sm text-gray-600">
             অ্যাকাউন্ট আছে?
-            <a
-              href="/login"
+            <Link
+              href="/sign-in"
               className="ml-1 font-semibold text-green-700 transition hover:text-green-800 hover:underline"
             >
               সাইন ইন করুন
-            </a>
+            </Link>
           </p>
         </form>
 

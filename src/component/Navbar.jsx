@@ -1,10 +1,24 @@
+"use client";
+import { signOut, useSession } from "@/lib/auth.client";
+import { CaretDown } from "@gravity-ui/icons";
+import { Avatar, Spinner } from "@heroui/react";
 import { format } from "date-fns";
 import { bn } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Avater from "./Avater";
 
 const Navbar = () => {
+  const { data: session, isPending } = useSession();
+  console.log(session);
+  if (isPending) {
+    return (
+      <div className="flex justify-center mt-5 items-center gap-4">
+        <Spinner />
+      </div>
+    );
+  }
   const today = format(new Date(), "EEEE, d MMMM yyyy", { locale: bn });
 
   return (
@@ -32,23 +46,36 @@ const Navbar = () => {
       </Link>
 
       {/* Authentication Buttons */}
-      <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
-        <Link href={`/sign-in`}>
-          <button className="flex-1 rounded-lg border border-green-600 px-4 py-2 text-sm font-semibold text-green-700 transition-all duration-200 hover:bg-green-50 sm:flex-none sm:px-5">
-            সাইন ইন
-          </button>
-        </Link>
+      {session?.user ? (
+        <div>
+          <div className="flex items-center gap-4">
+            <Avater session={session} />
+          </div>
 
-        <Link href={"/sign-up"}>
-        
-          <button className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-green-700 hover:shadow-md sm:flex-none sm:px-5">
-            সাইন আপ
-          </button>
-        </Link>
-      </div>
+          {/* <button
+            className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-green-700 hover:shadow-md sm:flex-none sm:px-5"
+            onClick={() => signOut()}
+          >
+            Logout
+          </button> */}
+        </div>
+      ) : (
+        <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
+          <Link href={`/sign-in`}>
+            <button className="flex-1 rounded-lg border border-green-600 px-4 py-2 text-sm font-semibold text-green-700 transition-all duration-200 hover:bg-green-50 sm:flex-none sm:px-5">
+              সাইন ইন
+            </button>
+          </Link>
+
+          <Link href={"/sign-up"}>
+            <button className="flex-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-green-700 hover:shadow-md sm:flex-none sm:px-5">
+              সাইন আপ
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
-  s;
 };
 
 export default Navbar;

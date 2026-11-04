@@ -1,7 +1,37 @@
+"use client";
+import { signIn } from "@/lib/auth.client";
 import Link from "next/link";
 import React from "react";
+import { Button } from "@heroui/react";
+import { useState } from "react";
+import { Eye, EyeSlash } from "@gravity-ui/icons";
 
 const SignInPage = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const useData = Object.fromEntries(formData.entries());
+    console.log(useData);
+    const { data, error } = await signIn.email({
+      email: useData.email,
+      password: useData.password,
+      callbackURL: "/",
+    });
+    console.log("sign in ", data, error);
+  };
+  const handleSignInGoogle = async () => {
+  const data = await signIn.social({
+    provider: "google",
+  });
+  console.log(data)
+};
+  const handleSignInGithub = async () => {
+  const data = await signIn.social({
+    provider: "github",
+  });
+  console.log(data)
+};
   return (
     <div className="mt-10">
       <div className="text-center ">
@@ -13,7 +43,7 @@ const SignInPage = () => {
       </div>
 
       <div className="mx-auto my-10 w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-lg sm:p-8">
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={onSubmit}>
           {/* Name */}
 
           {/* Email */}
@@ -36,18 +66,35 @@ const SignInPage = () => {
             <label className="mb-1 block text-sm font-medium text-gray-700">
               পাসওয়ার্ড
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="কমপক্ষে ৮ অক্ষর"
-              minLength={8}
-              required
-              autoComplete="new-password"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
-            />
+            <div className="flex justify-between items-center gap-3">
+              <input
+                type={isVisible ? "text" : "password"}
+                name="password"
+                placeholder="কমপক্ষে ৮ অক্ষর"
+                minLength={8}
+                required
+                autoComplete="new-password"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
+              />
+              <Button
+                className={"border p-3 "}
+                isIconOnly
+                aria-label={isVisible ? "Hide password" : "Show password"}
+                size="sm"
+                variant="ghost"
+                onPress={() => setIsVisible(!isVisible)}
+              >
+                {isVisible ? (
+                  <Eye className="size-4" />
+                ) : (
+                  <EyeSlash className="size-4" />
+                )}
+              </Button>
+            </div>
           </div>
 
-          {/* Sign Up */}
+          {/* Sign In */}
+
           <button
             type="submit"
             className="w-full rounded-xl bg-green-700 px-5 py-3 font-semibold text-white transition hover:bg-green-800 active:scale-[0.98]"
@@ -65,6 +112,7 @@ const SignInPage = () => {
           {/* Social Login */}
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
+            onClick={handleSignInGoogle}
               type="button"
               className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50 hover:shadow-md"
             >
@@ -72,6 +120,7 @@ const SignInPage = () => {
             </button>
 
             <button
+            onClick={handleSignInGithub}
               type="button"
               className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-900 px-3 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-black"
             >
@@ -83,7 +132,7 @@ const SignInPage = () => {
           <p className="pt-3 text-center text-sm text-gray-600">
             অ্যাকাউন্ট নেই?
             <a
-              href="/login"
+              href="/sign-up"
               className="ml-1 font-semibold text-green-700 transition hover:text-green-800 hover:underline"
             >
               সাইন আপ করুন
