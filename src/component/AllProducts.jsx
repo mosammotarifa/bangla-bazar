@@ -56,11 +56,12 @@ const AllProducts = async () => {
                 </div>
 
                 {/* Price Info */}
-                <div className="flex items-end justify-between border-t border-gray-100 pt-4">
+                <div className="flex items-end justify-between  pt-4">
                   <div>
                     <p className="mb-1 text-sm text-gray-500">আজকের দাম</p>
                     <p className="text-2xl font-bold text-gray-900">
-                      {Number(product.today).toLocaleString("bn-BD")}টাকা
+                      {Number(product.today).toLocaleString("bn-BD")}
+                      <span className="font-bold text-xl">টাকা</span>
                     </p>
                   </div>
 

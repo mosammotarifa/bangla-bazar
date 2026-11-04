@@ -55,11 +55,12 @@ const PriceIncrease = async () => {
                   </div>
 
                   {/* Price Info */}
-                  <div className="mt-4 flex items-end justify-between border-t border-gray-100 pt-4">
+                  <div className="mt-4 flex items-end justify-between  pt-4">
                     <div>
                       <p className="mb-1 text-sm text-gray-500">আজকের দাম</p>
                       <p className="text-2xl font-bold text-gray-900">
-                        {Number(priceince.today).toLocaleString("bn-BD")}টাকা
+                        {Number(priceince.today).toLocaleString("bn-BD")}
+                        <span className="font-bold text-xl">টাকা</span>
                       </p>
                     </div>
 
