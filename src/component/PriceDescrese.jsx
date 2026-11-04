@@ -30,7 +30,7 @@ const PriceDrecrese = async () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Pricedrecrese.filter((pricedrec) => pricedrec.change.dir === "down")
-          .slice(0, 9)
+          .slice(0, 6)
           .map((pricedrec) => {
             return (
               <Link

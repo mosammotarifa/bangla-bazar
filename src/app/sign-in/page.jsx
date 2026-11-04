@@ -10,32 +10,59 @@ const SignInPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const useData = Object.fromEntries(formData.entries());
-    console.log(useData);
-    const { data, error } = await signIn.email({
-      email: useData.email,
-      password: useData.password,
-      callbackURL: "/",
-    });
-    console.log("sign in ", data, error);
+
+    try {
+      const { data, error } = await signIn.email({
+        email: useData.email,
+        password: useData.password,
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "ইমেইল অথবা পাসওয়ার্ড ভুল!");
+        return;
+      }
+
+      toast.success("সফলভাবে সাইন ইন হয়েছে!");
+    } catch (error) {
+      toast.error("সাইন ইন করতে সমস্যা হয়েছে!");
+      console.error(error);
+    }
   };
   const handleSignInGoogle = async () => {
-    const data = await signIn.social({
-      provider: "google",
-    });
-    console.log(data);
+    try {
+      const { data, error } = await signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "Google দিয়ে সাইন ইন ব্যর্থ হয়েছে!");
+      }
+    } catch (error) {
+      toast.error("Google সাইন ইন করতে সমস্যা হয়েছে!");
+    }
   };
   const handleSignInGithub = async () => {
-    const data = await signIn.social({
-      provider: "github",
-    });
-    console.log(data);
+    try {
+      const { data, error } = await signIn.social({
+        provider: "github",
+        callbackURL: "/",
+      });
+
+      if (error) {
+        toast.error(error.message || "GitHub দিয়ে সাইন ইন ব্যর্থ হয়েছে!");
+      }
+    } catch (error) {
+      toast.error("GitHub সাইন ইন করতে সমস্যা হয়েছে!");
+    }
   };
   return (
     <div className="bg-gray-100">
       <div className="container mx-auto">
-        
         <div className="mt-10">
           <div className="text-center ">
             <h2 className="mb-2 text-2xl font-bold text-gray-900">

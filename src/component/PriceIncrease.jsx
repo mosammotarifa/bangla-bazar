@@ -30,7 +30,7 @@ const PriceIncrease = async () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Priceincrease.filter((priceince) => priceince.change.dir === "up")
-          .slice(0, 9)
+          .slice(0, 6)
           .map((priceince) => {
             return (
               <Link
