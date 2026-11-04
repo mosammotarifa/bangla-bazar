@@ -26,7 +26,7 @@ const AllCategoryProduct = ({ categorydata }) => {
             </div>
 
             {/* Price Info */}
-            <div className="flex flex-wrap items-end justify-between gap-3 border-t border-gray-100 pt-4">
+            <div className="flex flex-wrap items-end justify-between gap-3  pt-4">
               <div>
                 <p className="mb-1 text-sm text-gray-500">আজকের দাম</p>
 
